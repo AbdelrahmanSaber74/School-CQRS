@@ -1,0 +1,10 @@
+﻿global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Identity;
+global using School.Data.Entities;
+global using School.Infrastructure.Abstracts;
+global using School.Infrastructure.Context;
+global using School.Infrastructure.Repositories;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Configuration;
