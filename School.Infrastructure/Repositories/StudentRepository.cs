@@ -16,7 +16,7 @@
 
         public async Task<List<Student>> GetStudentsListAsync()
         {
-            return await _context.Students.ToListAsync();
+            return await _context.Students.Include(r=>r.Department).Include(s=>s.StudentSubjects).ThenInclude(s=>s.Subject).ToListAsync();
         }
     }
 }

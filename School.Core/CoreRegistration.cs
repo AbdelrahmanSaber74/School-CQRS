@@ -1,14 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-
-namespace School.Service
+﻿namespace School.Service
 {
     public static class CoreRegistration
     {
         public static IServiceCollection ConfigureCore(this IServiceCollection services, IConfiguration configuration)
         {
+            // Register MediatR
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
+            // Register AutoMapper
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }

@@ -1,0 +1,11 @@
+﻿global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Reflection;
+global using MediatR;
+global using School.Core.Features.Students.Queries.Models;
+global using School.Data.Entities;
+global using School.Service.Abstracts;
+global using AutoMapper;
+global using School.Core.Features.Students.Dto;
+global using System.Net;
+global using School.Core.Basics;

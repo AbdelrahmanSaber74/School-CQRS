@@ -1,25 +1,21 @@
-﻿using MediatR;
-using School.Core.Features.Students.Queries.Models;
-using School.Data.Entities;
-using School.Service.Abstracts;
-
-
-namespace School.Core.Features.Students.Queries.Handlers
+﻿namespace School.Core.Features.Students.Queries.Handlers
 {
-    public class StudentHandler : IRequestHandler<GetStudentsListQuery, List<Student>>
+    public class StudentHandler : ResponseHandler, IRequestHandler<GetStudentsListQuery, Response<List<GetStudentsListDTO>>>
     {
-
         private readonly IStudentService _studentService;
+        private readonly IMapper _mapper;
 
-        public StudentHandler(IStudentService studentService)
+        public StudentHandler(IStudentService studentService, IMapper mapper)
         {
             _studentService = studentService;
+            _mapper = mapper;
         }
 
-        public async Task<List<Student>> Handle(GetStudentsListQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<GetStudentsListDTO>>> Handle(GetStudentsListQuery request, CancellationToken cancellationToken)
         {
-            return await _studentService.GetStudentsListAsync();
-
+            var students = await _studentService.GetStudentsListAsync();
+            var mappedStudents = _mapper.Map<List<GetStudentsListDTO>>(students);
+            return Success(mappedStudents);
         }
     }
 }
