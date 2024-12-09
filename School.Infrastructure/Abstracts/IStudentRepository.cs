@@ -1,8 +1,7 @@
 ﻿namespace School.Infrastructure.Abstracts
 {
-    public interface IStudentRepository
+    public interface IStudentRepository : IGenericRepositoryAsync<Student>
     {
-        public Task<Student> GetByIdAsync(int id);
-        public Task<List<Student>> GetStudentsListAsync();
+    
     }
 }

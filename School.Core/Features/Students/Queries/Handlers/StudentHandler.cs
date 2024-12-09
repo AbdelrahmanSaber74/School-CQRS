@@ -1,6 +1,6 @@
 ﻿namespace School.Core.Features.Students.Queries.Handlers
 {
-    public class StudentHandler : ResponseHandler, IRequestHandler<GetStudentsListQuery, Response<List<GetStudentsListDTO>>>
+    public class StudentHandler : ResponseHandler, IRequestHandler<GetStudentsListQuery, Response<IEnumerable<GetStudentsListDTO>>>
     {
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
@@ -11,11 +11,13 @@
             _mapper = mapper;
         }
 
-        public async Task<Response<List<GetStudentsListDTO>>> Handle(GetStudentsListQuery request, CancellationToken cancellationToken)
+        public async Task<Response<IEnumerable<GetStudentsListDTO>>> Handle(GetStudentsListQuery request, CancellationToken cancellationToken)
         {
             var students = await _studentService.GetStudentsListAsync();
-            var mappedStudents = _mapper.Map<List<GetStudentsListDTO>>(students);
+            var mappedStudents = _mapper.Map<IEnumerable<GetStudentsListDTO>>(students);
             return Success(mappedStudents);
         }
+
+      
     }
 }

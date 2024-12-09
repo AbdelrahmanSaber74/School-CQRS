@@ -8,3 +8,8 @@ global using School.Infrastructure.Context;
 global using School.Infrastructure.Repositories;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Configuration;
+global using Microsoft.EntityFrameworkCore.Query;
+global using System.Linq.Expressions;
+global using School.Data.Consts;
+global using School.Infrastructure.Basics;
+global using Microsoft.EntityFrameworkCore.Storage;

@@ -1,22 +1,13 @@
 ﻿namespace School.Infrastructure.Repositories
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentRepository : GenericRepositoryAsync<Student>, IStudentRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public StudentRepository(ApplicationDbContext context)
+        private readonly DbSet<Student> _students;
+        public StudentRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _students = dbContext.Set<Student>();
         }
 
-        public async Task<Student> GetByIdAsync(int id)
-        {
-            return await _context.Students.FindAsync(id);
-        }
-
-        public async Task<List<Student>> GetStudentsListAsync()
-        {
-            return await _context.Students.Include(r=>r.Department).Include(s=>s.StudentSubjects).ThenInclude(s=>s.Subject).ToListAsync();
-        }
+      
     }
 }

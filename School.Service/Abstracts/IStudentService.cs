@@ -1,8 +1,9 @@
 ﻿namespace School.Service.Abstracts
 {
-    public interface IStudentService
+    public interface IStudentService 
     {
-        public Task<List<Student>> GetStudentsListAsync();
+        public Task<IEnumerable<Student>> GetStudentsListAsync();
+        public Task<Student> Find(int id);
 
     }
 }

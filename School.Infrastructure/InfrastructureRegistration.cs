@@ -9,6 +9,7 @@ public static class InfrastructureRegistration
 
         // Register repositories
         services.AddTransient<IStudentRepository, StudentRepository>();
+        services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
 
         // Register other infrastructure dependencies
         services.AddLogging();
