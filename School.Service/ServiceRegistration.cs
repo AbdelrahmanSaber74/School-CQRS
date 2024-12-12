@@ -7,6 +7,7 @@
 
             // Register repositories with their interfaces
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<ISubjectService, SubjectsService>();
 
             // Register other infrastructure dependencies
             services.AddLogging();

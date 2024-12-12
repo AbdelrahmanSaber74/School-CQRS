@@ -1,6 +1,6 @@
-﻿namespace School.Core.Features.Students.Dto
+﻿namespace School.Core.Dto
 {
-    public class GetStudentsListDTO 
+    public class StudentDTO
     {
         public string Name { get; set; }
         public string Address { get; set; }

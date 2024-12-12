@@ -32,7 +32,15 @@ public class ResponseHandler
             Message = "Unauthorized"
         };
     }
-
+    public Response<T> UnprocessableEntity<T>(string? message = null)
+    {
+        return new Response<T>
+        {
+            StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
+            Succeeded = false,
+            Message = message ?? "UnprocessableEntity"
+        };
+    }
     public Response<T> BadRequest<T>(string message = null)
     {
         return new Response<T>

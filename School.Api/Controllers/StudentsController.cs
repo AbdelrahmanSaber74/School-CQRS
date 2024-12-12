@@ -1,28 +1,43 @@
-﻿using MediatR;
-using School.Core.Features.Students.Queries.Models;
+﻿using School.Core.Dto;
+using School.Core.Features.Students.Commands.Models;
 
-namespace School.Web.Controllers
+namespace School.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentsController : ControllerBase
+    public class StudentsController : BaseController
     {
-        
-        private readonly IMediator _mediator;
-
-        public StudentsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
+        public StudentsController(IMediator mediator) : base(mediator) { }
 
         [HttpGet]
-        public async Task<ActionResult<List<Student>>> GetStudentsList()
+        [Route(Router.Students.GetAll)]
+        public async Task<IActionResult> Get()
         {
-            var result = await _mediator.Send(new GetStudentsListQuery() );
+            var result = await _mediator.Send(new GetStudentsListQuery());
 
-            return Ok(result);
+            return HandleResult(result);
 
         }
+
+        [HttpPost]
+        [Route(Router.Students.AddStudent)]
+        public async Task<IActionResult> Post(AddStudentDTO studentDTO)
+        {
+            var result = await _mediator.Send(new AddStudentCommand(studentDTO));
+
+            return HandleResult(result);
+
+
+        }
+
+        [HttpGet]
+        [Route(Router.Students.GetById)]
+
+        public async Task<IActionResult> Get(int id)
+        {
+            var result = await _mediator.Send(new GetStudentByIdQuery(id));
+            return HandleResult(result);
+        }
+
     }
 }

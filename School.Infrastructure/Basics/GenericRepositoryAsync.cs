@@ -1,11 +1,12 @@
-﻿namespace School.Infrastructure.Basics
+﻿
+namespace School.Infrastructure.Basics
 {
     public class GenericRepositoryAsync<T> : IGenericRepositoryAsync<T> where T : class
     {
-        private readonly DbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepositoryAsync(DbContext dbContext)
+        public GenericRepositoryAsync(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = dbContext.Set<T>();
@@ -117,5 +118,8 @@
         {
             return _dbSet.AsQueryable();
         }
+
+      
+
     }
 }
