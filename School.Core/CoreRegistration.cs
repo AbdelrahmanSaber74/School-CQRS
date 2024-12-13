@@ -1,4 +1,6 @@
-﻿namespace School.Service
+﻿using School.Core.Behaviors;
+
+namespace School.Service
 {
     public static class CoreRegistration
     {
@@ -8,6 +10,7 @@
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 
             // Register AutoMapper

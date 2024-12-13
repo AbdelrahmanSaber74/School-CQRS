@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using School.Api.MiddleWare;
 using School.Infrastructure;
 using School.Infrastructure.Context;
 using School.Service;
@@ -13,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureInfrastructure(builder.Configuration)
                 .ConfigureServices(builder.Configuration)
                 .ConfigureCore(builder.Configuration);
+
+
+
 #endregion
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -20,6 +24,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddDefaultTokenProviders();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
 
 if (app.Environment.IsDevelopment())
 {
