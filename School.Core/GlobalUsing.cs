@@ -13,3 +13,4 @@ global using School.Core.Dto;
 global using School.Core.Features.Students.Commands.Models;
 global using  FluentValidation;
 global using School.Data.Consts;
+global using School.Core.Behaviors;

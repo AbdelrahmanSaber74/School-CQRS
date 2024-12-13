@@ -1,9 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using School.Api.MiddleWare;
-using School.Infrastructure;
-using School.Infrastructure.Context;
-using School.Service;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -14,9 +8,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureInfrastructure(builder.Configuration)
                 .ConfigureServices(builder.Configuration)
                 .ConfigureCore(builder.Configuration);
-
-
-
 #endregion
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
