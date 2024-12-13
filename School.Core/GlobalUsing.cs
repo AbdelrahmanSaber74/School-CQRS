@@ -9,6 +9,7 @@ global using AutoMapper;
 global using System.Net;
 global using School.Core.Basics;
 global using School.Data.Enums;
-global using System.ComponentModel.DataAnnotations;
 global using School.Core.Dto;
 global using School.Core.Features.Students.Commands.Models;
+global using  FluentValidation;
+global using School.Data.Consts;

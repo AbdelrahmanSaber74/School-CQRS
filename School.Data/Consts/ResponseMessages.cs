@@ -1,6 +1,6 @@
 ﻿namespace School.Data.Consts
 {
-    public static class Messages
+    public static class ResponseMessages
     {
         public const string SuccessMessage = "Entity added successfully.";
         public const string AlreadyExistsMessage = "Entity with the same phone or email already exists.";

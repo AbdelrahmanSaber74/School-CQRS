@@ -22,19 +22,19 @@ namespace School.Service.Implementation
 
             if (studentExists)
             {
-                return Messages.AlreadyExistsMessage;
+                return ResponseMessages.AlreadyExistsMessage;
 
             }
 
             if (DepartmentExists == false)
             {
-                return Messages.DepartmentNotFound;
+                return ResponseMessages.DepartmentNotFound;
             }
 
 
             await _studentRepository.AddAsync(student);
             await _studentRepository.SaveChangesAsync();
-            return Messages.SuccessMessage;
+            return ResponseMessages.SuccessMessage;
 
         }
 

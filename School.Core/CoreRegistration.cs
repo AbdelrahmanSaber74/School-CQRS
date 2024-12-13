@@ -7,8 +7,13 @@
             // Register MediatR
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+
             // Register AutoMapper
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+
 
             return services;
         }

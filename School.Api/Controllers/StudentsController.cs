@@ -21,7 +21,7 @@ namespace School.Api.Controllers
 
         [HttpPost]
         [Route(Router.Students.AddStudent)]
-        public async Task<IActionResult> Post(AddStudentDTO studentDTO)
+        public async Task<IActionResult> Post([FromBody] AddStudentDTO studentDTO)
         {
             var result = await _mediator.Send(new AddStudentCommand(studentDTO));
 
