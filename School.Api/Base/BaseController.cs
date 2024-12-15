@@ -20,6 +20,7 @@ public abstract class BaseController : ControllerBase
         return result.StatusCode switch
         {
             HttpStatusCode.OK => Ok(result), // 200 OK
+            HttpStatusCode.Created => StatusCode((int)result.StatusCode, result), // 201 Created
             HttpStatusCode.UnprocessableEntity => UnprocessableEntity(result), // 422 Unprocessable Entity
             HttpStatusCode.BadRequest => BadRequest(result), // 400 Bad Request
             HttpStatusCode.NotFound => NotFound(result), // 404 Not Found

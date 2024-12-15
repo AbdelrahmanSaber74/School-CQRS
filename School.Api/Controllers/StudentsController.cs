@@ -39,5 +39,14 @@ namespace School.Api.Controllers
             return HandleResult(result);
         }
 
+        [HttpPost]
+        [Route(Router.Students.EditStudent)]
+
+        public async Task<IActionResult> Get(EditStudentDTO editStudentDTO)
+        {
+            var result = await _mediator.Send(new EditStudentCommand(editStudentDTO));
+            return HandleResult(result);
+        }
+
     }
 }

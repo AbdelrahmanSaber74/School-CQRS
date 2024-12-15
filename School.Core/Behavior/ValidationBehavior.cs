@@ -14,18 +14,20 @@
         {
             var context = new ValidationContext<TRequest>(request);
 
-            var validationResults = _validators
-                .Select(v => v.Validate(context))
+            // Perform asynchronous validation
+            var validationResults = await Task.WhenAll(
+                _validators.Select(async v => await v.ValidateAsync(context, cancellationToken))
+            );
+
+            // Filter out invalid results
+            var failures = validationResults
                 .Where(r => !r.IsValid)
+                .SelectMany(r => r.Errors)
+                .Where(f => f != null)
                 .ToList();
 
-            if (validationResults.Any())
+            if (failures.Any())
             {
-                var failures = validationResults
-                    .SelectMany(r => r.Errors)
-                    .Where(f => f != null)
-                    .ToList();
-
                 throw new ValidationException(failures);
             }
 

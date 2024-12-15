@@ -1,6 +1,4 @@
-﻿using School.Core.Dto;
-
-namespace School.Core.Mapping;
+﻿namespace School.Core.Mapping;
 public class MappingProfile : Profile
 {
     public MappingProfile()
@@ -13,6 +11,8 @@ public class MappingProfile : Profile
 
 
         CreateMap<AddStudentDTO, Student>();
+
+        CreateMap<EditStudentDTO, Student>();
 
     }
 }

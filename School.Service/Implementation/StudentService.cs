@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using School.Data.Consts;
-
-namespace School.Service.Implementation
+﻿namespace School.Service.Implementation
 {
     public class StudentService : IStudentService
     {
@@ -16,26 +13,20 @@ namespace School.Service.Implementation
 
         public async Task<string> AddStudent(Student student)
         {
-
-            var studentExists = await _studentRepository.ExistsAsync(r => r.Phone == student.Phone || r.Email == student.Email);
-            var DepartmentExists = await _departmentRepository.ExistsAsync(d => d.Id == student.DepartmentId);
-
-            if (studentExists)
-            {
-                return ResponseMessages.AlreadyExistsMessage;
-
-            }
-
-            if (DepartmentExists == false)
-            {
-                return ResponseMessages.DepartmentNotFound;
-            }
-
-
             await _studentRepository.AddAsync(student);
             await _studentRepository.SaveChangesAsync();
             return ResponseMessages.SuccessMessage;
 
+        }
+
+        public async Task<bool> IsStudentUnique(string email, string phone)
+        {
+            return !await _studentRepository.ExistsAsync(r => r.Email == email || r.Phone == phone);
+        }
+
+        public async Task<bool> DepartmentExists(int departmentId)
+        {
+            return await _departmentRepository.ExistsAsync(d => d.Id == departmentId);
         }
 
         public async Task<Student> GetStudentByIdAsync(int id)
@@ -63,7 +54,47 @@ namespace School.Service.Implementation
             return students;
         }
 
+        public async Task<string> EditStudent(Student student)
+        {
+            try
+            {
+                // Find the student by ID
+                var existingStudent = await _studentRepository.FindAsync(r => r.Id == student.Id);
+
+                // If student not found, return an error message
+                if (existingStudent == null)
+                {
+                    return ResponseMessages.StudentNotFound;
+                }
+
+                existingStudent.Name = student.Name ?? existingStudent.Name;
+                existingStudent.Address = student.Address ?? existingStudent.Address;
+                existingStudent.Phone = student.Phone ?? existingStudent.Phone;
+                existingStudent.Email = student.Email ?? existingStudent.Email;
 
 
+                await _studentRepository.UpdateAsync(existingStudent);
+
+                // Return success message
+                return ResponseMessages.StudentUpdatedSuccessfully;
+            }
+            catch (Exception ex)
+            {
+                // Return a generic error message
+                return ex.InnerException?.Message ?? ex.Message;
+            }
+        }
+
+        public async Task<bool> IsEmailExistExcludeSelf(int id, string email)
+        {
+            var result = await _studentRepository.ExistsAsync(r => r.Email == email && r.Id != id);
+            return result;
+        }
+
+        public async Task<bool> IsPhoneExistExcludeSelf(int id , string phone)
+        {
+            var result = await _studentRepository.ExistsAsync(r => r.Phone == phone && r.Id != id );
+            return result;
+        }
     }
 }
