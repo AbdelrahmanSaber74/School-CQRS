@@ -13,3 +13,6 @@ global using School.Api.MiddleWare;
 global using School.Infrastructure;
 global using School.Infrastructure.Context;
 global using School.Service;
+global using School.Core.Dto;
+global using School.Core.Features.Students.Commands.Models;
+global using School.Core.Features.Subjects.Queries.Models;

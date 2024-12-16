@@ -1,9 +1,9 @@
-﻿using School.Core.Dto;
-
-namespace School.Core.Features.Students.Queries.Handlers
+﻿namespace School.Core.Features.Students.Queries.Handlers
 {
-    public class StudentQueryHandler : ResponseHandler, IRequestHandler<GetStudentsListQuery, Response<IEnumerable<StudentDTO>>>
-        , IRequestHandler<GetStudentByIdQuery, Response<StudentDTO>>
+    public class StudentQueryHandler : ResponseHandler,
+                                       IRequestHandler<GetStudentsListQuery, Response<IEnumerable<StudentDTO>>>,
+                                       IRequestHandler<GetStudentByIdQuery, Response<StudentDTO>>,
+                                       IRequestHandler<GetPaginatedStudentsListQuery, Response<PaginatedListDTO<StudentDTO>>>
     {
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
@@ -29,10 +29,21 @@ namespace School.Core.Features.Students.Queries.Handlers
             {
                 return NotFound<StudentDTO>("Student Not Found");
             }
-            var mappedStudents = _mapper.Map<StudentDTO>(student);
-            return Success(mappedStudents);
 
+            var mappedStudent = _mapper.Map<StudentDTO>(student);
+            return Success(mappedStudent);
+        }
 
+        public async Task<Response<PaginatedListDTO<StudentDTO>>> Handle(GetPaginatedStudentsListQuery request, CancellationToken cancellationToken)
+        {
+            // Fetch queryable students
+            var paginatedStudents = await _studentService.GetQueryableStudentsAsync(request.PageNumber, request.PageSize);
+
+            // Map to DTO
+            var paginatedStudentsDto = _mapper.Map<PaginatedListDTO<StudentDTO>>(paginatedStudents);
+
+            // Return response
+            return Success(paginatedStudentsDto);
         }
     }
 }

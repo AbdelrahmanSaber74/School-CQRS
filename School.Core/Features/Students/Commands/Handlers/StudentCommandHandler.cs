@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-
-namespace School.Core.Features.Students.Commands.Handlers
+﻿namespace School.Core.Features.Students.Commands.Handlers
 {
     public class StudentCommandHandler : ResponseHandler, IRequestHandler<AddStudentCommand, Response<string>>,
-                                                          IRequestHandler<EditStudentCommand, Response<string>>
+                                                          IRequestHandler<EditStudentCommand, Response<string>>,
+                                                          IRequestHandler<DeleteStudentCommand, Response<string>>
     {
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
@@ -38,15 +37,34 @@ namespace School.Core.Features.Students.Commands.Handlers
 
             var studentEntity = _mapper.Map<Student>(request.EditStudentDTO);
 
-            var result =  await _studentService.EditStudent(studentEntity);
+            var result = await _studentService.EditStudent(studentEntity);
 
             if (result == ResponseMessages.StudentUpdatedSuccessfully)
             {
 
-                return Success(string.Empty, result);   
+                return Success(string.Empty, result);
             }
 
             return NotFound<string>(result);
+
+        }
+
+        public async Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
+        {
+
+            var result = await _studentService.DeleteStudent(request.Id);
+
+            if (result == ResponseMessages.SuccessDeleteMessage)
+            {
+                return Deleted<string>();
+            }
+
+            else if (result == ResponseMessages.StudentNotFound)
+            {
+                return NotFound<string>(result);
+            }
+
+            return BadRequest<string>(result);
 
         }
     }

@@ -1,7 +1,4 @@
-﻿using School.Core.Dto;
-using School.Core.Features.Students.Commands.Models;
-
-namespace School.Api.Controllers
+﻿namespace School.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -48,5 +45,24 @@ namespace School.Api.Controllers
             return HandleResult(result);
         }
 
+
+        [HttpPost]
+        [Route(Router.Students.DeleteStudent)]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteStudentCommand(id));
+            return HandleResult(result);
+        }
+
+
+        [HttpGet]
+        [Route(Router.Students.GetPaginatedStudents)]
+
+        public async Task<IActionResult> Get(int pageNumber , int pageSize)
+        {
+            var result = await _mediator.Send(new GetPaginatedStudentsListQuery(pageNumber , pageSize));
+            return HandleResult(result);
+        }
     }
 }

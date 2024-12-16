@@ -1,7 +1,4 @@
-﻿using MediatR;
-using School.Core.Features.Subjects.Queries.Models;
-
-namespace School.Api.Controllers
+﻿namespace School.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

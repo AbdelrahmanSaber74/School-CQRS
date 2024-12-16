@@ -8,8 +8,10 @@
         {
             public const string GetById = $"{BaseApi}/GetById/{{id}}";
             public const string GetAll = $"{BaseApi}/GetAllStudents";
+            public const string GetPaginatedStudents = $"{BaseApi}/GetPaginatedStudents";
             public const string AddStudent = $"{BaseApi}/AddStudent";
             public const string EditStudent = $"{BaseApi}/EditStudent";
+            public const string DeleteStudent = $"{BaseApi}/DeleteStudent/{{id}}";
         }
     }
 

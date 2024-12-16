@@ -8,6 +8,7 @@
         public const string DepartmentNotFound = "The department does not exist.";
         public const string StudentNotFound = "Student not found.";
         public const string StudentUpdatedSuccessfully = "Student updated successfully.";
+        public const string SuccessDeleteMessage = "Entity deleted successfully."; 
 
     }
 }

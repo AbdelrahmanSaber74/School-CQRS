@@ -6,3 +6,4 @@ global using School.Data.Entities;
 global using School.Infrastructure.Abstracts;
 global using Microsoft.EntityFrameworkCore;
 global using School.Data.Consts;
+global using School.Data.Wrappers;

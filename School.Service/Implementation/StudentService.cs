@@ -91,10 +91,41 @@
             return result;
         }
 
-        public async Task<bool> IsPhoneExistExcludeSelf(int id , string phone)
+        public async Task<bool> IsPhoneExistExcludeSelf(int id, string phone)
         {
-            var result = await _studentRepository.ExistsAsync(r => r.Phone == phone && r.Id != id );
+            var result = await _studentRepository.ExistsAsync(r => r.Phone == phone && r.Id != id);
             return result;
         }
+
+        public async Task<string> DeleteStudent(int id)
+        {
+            try
+            {
+                var student = await _studentRepository.FindAsync(s => s.Id == id);
+
+                if (student != null)
+                {
+                    await _studentRepository.DeleteAsync(student);
+                    return ResponseMessages.SuccessDeleteMessage;
+                }
+
+                return ResponseMessages.StudentNotFound;
+            }
+            catch (Exception ex)
+            {
+                return $"An error occurred: {ex.InnerException}";
+            }
+        }
+
+        public async Task<PaginatedList<Student>> GetQueryableStudentsAsync(int pageNumber, int pageSize)
+        {
+            var queryableStudents = _studentRepository.GetQueryable()
+                .Include(student => student.Department)
+                .Include(student => student.StudentSubjects)
+                    .ThenInclude(studentSubject => studentSubject.Subject);
+
+            return PaginatedList<Student>.Create(queryableStudents, pageNumber, pageSize);
+        }
+
     }
 }
