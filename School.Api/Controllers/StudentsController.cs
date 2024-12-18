@@ -58,7 +58,6 @@
 
         [HttpGet]
         [Route(Router.Students.GetPaginatedStudents)]
-
         public async Task<IActionResult> Get(int pageNumber , int pageSize)
         {
             var result = await _mediator.Send(new GetPaginatedStudentsListQuery(pageNumber , pageSize));

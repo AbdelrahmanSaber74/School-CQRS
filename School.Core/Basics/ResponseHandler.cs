@@ -1,75 +1,59 @@
-﻿namespace School.Core.Basics;
-public class ResponseHandler
+﻿namespace School.Core.Basics
 {
-    public Response<T> Deleted<T>()
+    public class ResponseHandler
     {
-        return new Response<T>
-        {
-            StatusCode = System.Net.HttpStatusCode.OK,
-            Succeeded = true,
-            Message = "Deleted successfully"
-        };
-    }
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-    public Response<T> Success<T>(T entity, object meta = null)
-    {
-        return new Response<T>
+        public ResponseHandler(IStringLocalizer<SharedResource> localizer)
         {
-            Data = entity,
-            StatusCode = System.Net.HttpStatusCode.OK,
-            Succeeded = true,
-            Message = "Operation completed successfully",
-            Meta = meta
-        };
-    }
+            _localizer = localizer;
+        }
 
-    public Response<T> Unauthorized<T>()
-    {
-        return new Response<T>
+        public Response<T> Deleted<T>()
         {
-            StatusCode = System.Net.HttpStatusCode.Unauthorized,
-            Succeeded = false,
-            Message = "Unauthorized"
-        };
-    }
-    public Response<T> UnprocessableEntity<T>(string? message = null)
-    {
-        return new Response<T>
-        {
-            StatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
-            Succeeded = false,
-            Message = message ?? "UnprocessableEntity"
-        };
-    }
-    public Response<T> BadRequest<T>(string message = null)
-    {
-        return new Response<T>
-        {
-            StatusCode = System.Net.HttpStatusCode.BadRequest,
-            Succeeded = false,
-            Message = message ?? "Bad request"
-        };
-    }
+            return CreateResponse<T>(HttpStatusCode.OK, true, _localizer[ResourceKeys.DeletedSuccessfully]);
+        }
 
-    public Response<T> NotFound<T>(string message = null)
-    {
-        return new Response<T>
+        public Response<T> Success<T>(T entity, object meta = null)
         {
-            StatusCode = System.Net.HttpStatusCode.NotFound,
-            Succeeded = false,
-            Message = message ?? "Not found"
-        };
-    }
+            return CreateResponse(HttpStatusCode.OK, true, _localizer[ResourceKeys.OperationCompletedSuccessfully], entity, meta);
+        }
 
-    public Response<T> Created<T>(T entity, object meta = null)
-    {
-        return new Response<T>
+        public Response<T> Unauthorized<T>()
         {
-            Data = entity,
-            StatusCode = System.Net.HttpStatusCode.Created,
-            Succeeded = true,
-            Message = "Created successfully",
-            Meta = meta
-        };
+            return CreateResponse<T>(HttpStatusCode.Unauthorized, false, _localizer[ResourceKeys.Unauthorized]);
+        }
+
+        public Response<T> UnprocessableEntity<T>(string? message = null)
+        {
+            return CreateResponse<T>(HttpStatusCode.UnprocessableEntity, false, message ?? _localizer[ResourceKeys.UnprocessableEntity]);
+        }
+
+        public Response<T> BadRequest<T>(string message = null)
+        {
+            return CreateResponse<T>(HttpStatusCode.BadRequest, false, message ?? _localizer[ResourceKeys.BadRequest]);
+        }
+
+        public Response<T> NotFound<T>(string message = null)
+        {
+            return CreateResponse<T>(HttpStatusCode.NotFound, false, message ?? _localizer[ResourceKeys.NotFound]);
+        }
+
+        public Response<T> Created<T>(T entity, object meta = null)
+        {
+            return CreateResponse(HttpStatusCode.Created, true, _localizer[ResourceKeys.CreatedSuccessfully], entity, meta);
+        }
+
+        private Response<T> CreateResponse<T>(HttpStatusCode statusCode, bool succeeded, string message, T data = default, object meta = null)
+        {
+            return new Response<T>
+            {
+                StatusCode = statusCode,
+                Succeeded = succeeded,
+                Message = message,
+                Data = data,
+                Meta = meta
+            };
+        }
     }
 }

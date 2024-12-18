@@ -2,21 +2,24 @@
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class SubjectsController : BaseController
+    public class SubjectsController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-
-
-        public SubjectsController(IMediator mediator) : base(mediator) { }
-
-
-        [HttpGet]
-        public async Task<ActionResult<List<Subject>>> Get()
+        public SubjectsController(IStringLocalizer<SharedResource> localizer)
         {
-            var result = await _mediator.Send(new GetAllSubjects());
+            _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
+        }
 
-            return Ok(result);
+        // Example GET endpoint
+        [HttpGet]
+        public IActionResult Get()
+        {
+
+
+            var meesage = _localizer[ResourceKeys.WelcomeMessage];
+
+            return Ok(meesage);
 
         }
     }

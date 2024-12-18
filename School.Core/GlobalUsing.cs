@@ -15,3 +15,5 @@ global using FluentValidation;
 global using School.Data.Consts;
 global using School.Core.Behaviors;
 global using School.Data.Wrappers;
+global using Microsoft.Extensions.Localization;
+global using School.Core.Resources;

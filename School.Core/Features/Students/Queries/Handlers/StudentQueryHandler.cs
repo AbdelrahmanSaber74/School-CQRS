@@ -7,11 +7,14 @@
     {
         private readonly IStudentService _studentService;
         private readonly IMapper _mapper;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-        public StudentQueryHandler(IStudentService studentService, IMapper mapper)
+        public StudentQueryHandler(IStudentService studentService, IMapper mapper, IStringLocalizer<SharedResource> localizer)
+            : base(localizer)
         {
             _studentService = studentService;
             _mapper = mapper;
+            _localizer = localizer;
         }
 
         public async Task<Response<IEnumerable<StudentDTO>>> Handle(GetStudentsListQuery request, CancellationToken cancellationToken)
@@ -24,10 +27,9 @@
         public async Task<Response<StudentDTO>> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
         {
             var student = await _studentService.GetStudentByIdAsync(request.Id);
-
             if (student == null)
             {
-                return NotFound<StudentDTO>("Student Not Found");
+                return NotFound<StudentDTO>(_localizer[ResourceKeys.NotFound]);
             }
 
             var mappedStudent = _mapper.Map<StudentDTO>(student);
@@ -36,13 +38,8 @@
 
         public async Task<Response<PaginatedListDTO<StudentDTO>>> Handle(GetPaginatedStudentsListQuery request, CancellationToken cancellationToken)
         {
-            // Fetch queryable students
             var paginatedStudents = await _studentService.GetQueryableStudentsAsync(request.PageNumber, request.PageSize);
-
-            // Map to DTO
             var paginatedStudentsDto = _mapper.Map<PaginatedListDTO<StudentDTO>>(paginatedStudents);
-
-            // Return response
             return Success(paginatedStudentsDto);
         }
     }
