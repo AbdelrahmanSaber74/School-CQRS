@@ -21,7 +21,9 @@
         {
             var students = await _studentService.GetStudentsListAsync();
             var mappedStudents = _mapper.Map<IEnumerable<StudentDTO>>(students);
-            return Success(mappedStudents);
+            var result = Success(mappedStudents);
+            result.Meta = new { count = mappedStudents.Count() };
+            return result;
         }
 
         public async Task<Response<StudentDTO>> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
@@ -33,14 +35,17 @@
             }
 
             var mappedStudent = _mapper.Map<StudentDTO>(student);
-            return Success(mappedStudent);
+            var result = Success(mappedStudent);
+            return result;
         }
 
         public async Task<Response<PaginatedListDTO<StudentDTO>>> Handle(GetPaginatedStudentsListQuery request, CancellationToken cancellationToken)
         {
             var paginatedStudents = await _studentService.GetQueryableStudentsAsync(request.PageNumber, request.PageSize);
             var paginatedStudentsDto = _mapper.Map<PaginatedListDTO<StudentDTO>>(paginatedStudents);
-            return Success(paginatedStudentsDto);
+            var result = Success(paginatedStudentsDto);
+            result.Meta = new { count = paginatedStudentsDto.Items.Count() };
+            return result;
         }
     }
 }
