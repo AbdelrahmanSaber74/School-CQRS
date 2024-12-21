@@ -1,14 +1,13 @@
 ﻿namespace School.Data.Entities
 {
-    public class StudentSubject
+    public class StudentAttendance : BaseEntity
     {
         public int StudentId { get; set; }
         public int SubjectId { get; set; }
-        public DateTime EnrollmentDate { get; set; }
-        public decimal? Grade { get; set; }
-        public GradeStatus GradeStatus { get; set; } = GradeStatus.NotGraded;
+        public DateTime Date { get; set; }
+        public bool IsPresent { get; set; }
+        public string Notes { get; set; }
 
-        // Navigation properties
         public virtual Student Student { get; set; }
         public virtual Subject Subject { get; set; }
     }

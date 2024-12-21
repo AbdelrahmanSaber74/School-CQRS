@@ -5,11 +5,11 @@
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
 
-            // Register repositories with their interfaces
+        //    Register repositories with their interfaces
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ISubjectService, SubjectsService>();
 
-            // Register other infrastructure dependencies
+          //  Register other infrastructure dependencies
             services.AddLogging();
 
 

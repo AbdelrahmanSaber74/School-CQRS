@@ -13,3 +13,4 @@ global using System.Linq.Expressions;
 global using School.Data.Consts;
 global using School.Infrastructure.Basics;
 global using Microsoft.EntityFrameworkCore.Storage;
+global using School.Data.Entities.Base;

@@ -67,7 +67,7 @@
                     return ResponseMessages.StudentNotFound;
                 }
 
-                existingStudent.Name = student.Name ?? existingStudent.Name;
+               // existingStudent.Name = student.Name ?? existingStudent.Name;
                 existingStudent.Address = student.Address ?? existingStudent.Address;
                 existingStudent.Phone = student.Phone ?? existingStudent.Phone;
                 existingStudent.Email = student.Email ?? existingStudent.Email;
