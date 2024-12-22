@@ -28,7 +28,14 @@
 
         public async Task<Response<string>> Handle(EditStudentCommand request, CancellationToken cancellationToken)
         {
-            var studentEntity = _mapper.Map<Student>(request.EditStudentDTO);
+            var student = await _studentService.GetStudentByIdAsync(request.EditStudentDTO.studentId);
+
+            if (student == null)
+            {
+                return NotFound<string>(_localizer[ResourceKeys.StudentNotFound]);
+            }
+
+            var studentEntity = _mapper.Map(request.EditStudentDTO, student);
             var result = await _studentService.EditStudent(studentEntity);
 
             return result == ResponseMessages.StudentUpdatedSuccessfully
@@ -38,7 +45,7 @@
 
         public async Task<Response<string>> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
         {
-            var result = await _studentService.DeleteStudent(request.Id);
+            var result = await _studentService.DeleteStudent(request.StudentId);
 
             return result switch
             {

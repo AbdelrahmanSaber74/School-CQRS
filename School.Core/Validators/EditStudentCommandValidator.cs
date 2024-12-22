@@ -11,10 +11,13 @@
             _localizer = localizer;
 
             // Validate Name
-            RuleFor(x => x.EditStudentDTO.Name)
+            RuleFor(x => x.EditStudentDTO.FirstName)
                 .NotEmpty().WithMessage(_localizer[ResourceKeys.NameRequired])
                 .MaximumLength(100).WithMessage(_localizer[ResourceKeys.NameMaxLength]);
 
+            RuleFor(x => x.EditStudentDTO.LastName)
+           .NotEmpty().WithMessage(_localizer[ResourceKeys.NameRequired])
+           .MaximumLength(100).WithMessage(_localizer[ResourceKeys.NameMaxLength]);
             // Validate Phone
             RuleFor(x => x.EditStudentDTO.Phone)
                 .NotEmpty().WithMessage(_localizer[ResourceKeys.PhoneRequired])
@@ -28,13 +31,13 @@
             // Validate Email uniqueness excluding self
             RuleFor(x => x.EditStudentDTO)
                 .MustAsync(async (student, cancellationToken) =>
-                    !await _studentService.IsEmailExistExcludeSelf(student.Id, student.Email))
+                    !await _studentService.IsEmailExistExcludeSelf(student.studentId, student.Email))
                 .WithMessage(_localizer[ResourceKeys.AlreadyExistsMessage]);
 
             // Validate Phone uniqueness excluding self
             RuleFor(x => x.EditStudentDTO)
                 .MustAsync(async (student, cancellationToken) =>
-                    !await _studentService.IsPhoneExistExcludeSelf(student.Id, student.Phone))
+                    !await _studentService.IsPhoneExistExcludeSelf(student.studentId, student.Phone))
                 .WithMessage(_localizer[ResourceKeys.AlreadyExistsMessage]);
         }
     }

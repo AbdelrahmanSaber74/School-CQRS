@@ -14,13 +14,20 @@ namespace School.Infrastructure.Migrations
             migrationBuilder.EnsureSchema(
                 name: "School");
 
+            migrationBuilder.EnsureSchema(
+                name: "shared");
+
+            migrationBuilder.CreateSequence<int>(
+                name: "SerialNumber",
+                schema: "shared",
+                startValue: 1000001L);
+
             migrationBuilder.CreateTable(
                 name: "ApplicationUser",
                 schema: "School",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -29,6 +36,7 @@ namespace School.Infrastructure.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -351,7 +359,7 @@ namespace School.Infrastructure.Migrations
                     Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    StudentId = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, defaultValueSql: "NEXT VALUE FOR shared.SerialNumber"),
                     Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AcademicLevel = table.Column<int>(type: "int", nullable: false),
                     GPA = table.Column<decimal>(type: "decimal(3,2)", nullable: true),
@@ -941,6 +949,10 @@ namespace School.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Departments");
+
+            migrationBuilder.DropSequence(
+                name: "SerialNumber",
+                schema: "shared");
         }
     }
 }

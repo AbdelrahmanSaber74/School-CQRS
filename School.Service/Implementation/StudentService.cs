@@ -19,9 +19,9 @@
 
         }
 
-        public async Task<bool> IsStudentUnique(string email, string phone)
+        public async Task<bool> IsStudentUnique(string email, string phone, string nationalId)
         {
-            return !await _studentRepository.ExistsAsync(r => r.Email == email || r.Phone == phone);
+            return !await _studentRepository.ExistsAsync(r => r.Email == email || r.Phone == phone || r.NationalId == nationalId);
         }
 
         public async Task<bool> DepartmentExists(int departmentId)
@@ -29,14 +29,14 @@
             return await _departmentRepository.ExistsAsync(d => d.Id == departmentId);
         }
 
-        public async Task<Student> GetStudentByIdAsync(int id)
+        public async Task<Student> GetStudentByIdAsync(string studentId)
         {
 
             var student = await _studentRepository.GetTableNoTracking()
                 .Include(d => d.Department)
                 .Include(s => s.StudentSubjects)
                 .ThenInclude(ss => ss.Subject)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.StudentId == studentId);
 
             return student;
 
@@ -58,22 +58,7 @@
         {
             try
             {
-                // Find the student by ID
-                var existingStudent = await _studentRepository.FindAsync(r => r.Id == student.Id);
-
-                // If student not found, return an error message
-                if (existingStudent == null)
-                {
-                    return ResponseMessages.StudentNotFound;
-                }
-
-               // existingStudent.Name = student.Name ?? existingStudent.Name;
-                existingStudent.Address = student.Address ?? existingStudent.Address;
-                existingStudent.Phone = student.Phone ?? existingStudent.Phone;
-                existingStudent.Email = student.Email ?? existingStudent.Email;
-
-
-                await _studentRepository.UpdateAsync(existingStudent);
+                await _studentRepository.UpdateAsync(student);
 
                 // Return success message
                 return ResponseMessages.StudentUpdatedSuccessfully;
@@ -85,23 +70,23 @@
             }
         }
 
-        public async Task<bool> IsEmailExistExcludeSelf(int id, string email)
+        public async Task<bool> IsEmailExistExcludeSelf(string studentId, string email)
         {
-            var result = await _studentRepository.ExistsAsync(r => r.Email == email && r.Id != id);
+            var result = await _studentRepository.ExistsAsync(r => r.Email == email && r.StudentId != studentId);
             return result;
         }
 
-        public async Task<bool> IsPhoneExistExcludeSelf(int id, string phone)
+        public async Task<bool> IsPhoneExistExcludeSelf(string studentId, string phone)
         {
-            var result = await _studentRepository.ExistsAsync(r => r.Phone == phone && r.Id != id);
+            var result = await _studentRepository.ExistsAsync(r => r.Phone == phone && r.StudentId != studentId);
             return result;
         }
 
-        public async Task<string> DeleteStudent(int id)
+        public async Task<string> DeleteStudent(string studentId)
         {
             try
             {
-                var student = await _studentRepository.FindAsync(s => s.Id == id);
+                var student = await _studentRepository.FindAsync(s => s.StudentId == studentId);
 
                 if (student != null)
                 {

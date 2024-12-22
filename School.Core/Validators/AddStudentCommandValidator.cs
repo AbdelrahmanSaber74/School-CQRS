@@ -10,9 +10,13 @@
             _studentService = studentService ?? throw new ArgumentNullException(nameof(studentService));
             _localizer = localizer ?? throw new ArgumentNullException(nameof(localizer));
 
-            RuleFor(x => x.Student.Name)
+            RuleFor(x => x.Student.FirstName)
                 .NotEmpty().WithMessage(_localizer[ResourceKeys.NameRequired])
                 .MaximumLength(100).WithMessage(_localizer[ResourceKeys.NameMaxLength]);
+
+            RuleFor(x => x.Student.LastName)
+             .NotEmpty().WithMessage(_localizer[ResourceKeys.NameRequired])
+             .MaximumLength(100).WithMessage(_localizer[ResourceKeys.NameMaxLength]);
 
             RuleFor(x => x.Student.Phone)
                 .NotEmpty().WithMessage(_localizer[ResourceKeys.PhoneRequired])
@@ -38,8 +42,33 @@
 
             RuleFor(x => x.Student)
                 .MustAsync(async (student, cancellation) =>
-                    await _studentService.IsStudentUnique(student.Email, student.Phone))
+                    await _studentService.IsStudentUnique(student.Email, student.Phone , student.NationalId))
                 .WithMessage(_localizer[ResourceKeys.AlreadyExistsMessage]);
+
+
+            RuleFor(x => x.Student.City)
+                .NotEmpty().WithMessage(_localizer[ResourceKeys.CityRequired]);
+
+            RuleFor(x => x.Student.Country)
+                .NotEmpty().WithMessage(_localizer[ResourceKeys.CountryRequired]);
+
+            RuleFor(x => x.Student.NationalId)
+                .NotEmpty().WithMessage(_localizer[ResourceKeys.NationalIdRequired])
+                .Matches(ValidationPatterns.NationalId).WithMessage(_localizer[ResourceKeys.NationalIdInvalidFormat]);
+
+            RuleFor(x => x.Student.PostalCode)
+                .NotEmpty().WithMessage(_localizer[ResourceKeys.PostalCodeRequired])
+                .Matches(ValidationPatterns.PostalCode).WithMessage(_localizer[ResourceKeys.PostalCodeInvalidFormat]);
+
+            RuleFor(x => x.Student.EmergencyContactName)
+                .NotEmpty().WithMessage(_localizer[ResourceKeys.EmergencyContactNameRequired]);
+
+            RuleFor(x => x.Student.EmergencyContactPhone)
+                .NotEmpty().WithMessage(_localizer[ResourceKeys.EmergencyContactPhoneRequired])
+                .Matches(ValidationPatterns.PhoneNumber).WithMessage(_localizer[ResourceKeys.PhoneInvalidFormat]);
+
+            RuleFor(x => x.Student.EmergencyContactRelation)
+                .NotEmpty().WithMessage(_localizer[ResourceKeys.EmergencyContactRelationRequired]);
         }
     }
 }

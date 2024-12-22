@@ -30,9 +30,9 @@
         [HttpGet]
         [Route(Router.Students.GetById)]
 
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(string studentId)
         {
-            var result = await _mediator.Send(new GetStudentByIdQuery(id));
+            var result = await _mediator.Send(new GetStudentByIdQuery(studentId));
             return HandleResult(result);
         }
 
@@ -49,9 +49,9 @@
         [HttpPost]
         [Route(Router.Students.DeleteStudent)]
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string studentId)
         {
-            var result = await _mediator.Send(new DeleteStudentCommand(id));
+            var result = await _mediator.Send(new DeleteStudentCommand(studentId));
             return HandleResult(result);
         }
 

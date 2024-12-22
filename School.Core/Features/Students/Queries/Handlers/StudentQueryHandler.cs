@@ -28,7 +28,7 @@
 
         public async Task<Response<StudentDTO>> Handle(GetStudentByIdQuery request, CancellationToken cancellationToken)
         {
-            var student = await _studentService.GetStudentByIdAsync(request.Id);
+            var student = await _studentService.GetStudentByIdAsync(request.StudentId);
             if (student == null)
             {
                 return NotFound<StudentDTO>(_localizer[ResourceKeys.NotFound]);

@@ -2,11 +2,11 @@
 {
     public class DeleteStudentCommand : IRequest<Response<string>>
     {
-        public int Id { get; set; }
+        public string StudentId { get; set; }
 
-        public DeleteStudentCommand(int id)
+        public DeleteStudentCommand(string studentId)
         {
-            Id = id;
+            StudentId = studentId;
         }
 
     }

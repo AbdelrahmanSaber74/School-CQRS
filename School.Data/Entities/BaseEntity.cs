@@ -10,7 +10,7 @@
         public DateTime? DeletedAt { get; set; }
 
         [MaxLength(100)]
-        public string DeletedBy { get; set; }
+        public string? DeletedBy { get; set; }
         public bool IsActive { get; set; } = true;
         public EntityStatus Status { get; set; } = EntityStatus.Active;
         #endregion
@@ -35,11 +35,11 @@
 
         #region Metadata Properties
         [MaxLength(50)]
-        public string IpAddress { get; set; }
+        public string? IpAddress { get; set; }
 
         [MaxLength(250)]
-        public string UserAgent { get; set; }
-        public string Metadata { get; set; }
+        public string? UserAgent { get; set; }
+        public string? Metadata { get; set; }
         #endregion
 
         #region Methods

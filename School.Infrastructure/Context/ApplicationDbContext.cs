@@ -20,10 +20,10 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             ApplyGlobalConfigurations(modelBuilder);
             ConfigureEntities(modelBuilder);
             ConfigureRelationships(modelBuilder);
+            ConfigureSequences(modelBuilder);
         }
 
         #region Configuration Methods
@@ -42,6 +42,15 @@
             }
         }
 
+        private static void ConfigureSequences(ModelBuilder builder)
+        {
+            builder.HasSequence<int>("SerialNumber", schema: "shared")
+                .StartsAt(1000001);
+
+            builder.Entity<Student>()
+                .Property(e => e.StudentId)
+                .HasDefaultValueSql("NEXT VALUE FOR shared.SerialNumber");
+        }
         private void ConfigureBaseEntityProperties(ModelBuilder modelBuilder, Type entityType)
         {
             modelBuilder.Entity(entityType)
@@ -127,6 +136,8 @@
                 builder.ToTable("Students");
                 builder.HasKey(s => s.Id);
 
+                // StudentId Configuration
+               
                 // Personal Information
                 builder.Property(s => s.FirstName)
                     .IsRequired()
@@ -148,8 +159,7 @@
                 builder.HasIndex(s => s.Email)
                     .IsUnique();
 
-                builder.HasIndex(s => s.StudentId)
-                    .IsUnique();
+                builder.HasIndex(s => s.StudentId);
 
                 builder.HasIndex(s => s.NationalId)
                     .IsUnique()

@@ -3,11 +3,11 @@
     public class GetStudentByIdQuery : IRequest<Response<StudentDTO>>
     {
 
-        public int Id { get; set; }
+        public string StudentId { get; set; }
 
-        public GetStudentByIdQuery(int id)
+        public GetStudentByIdQuery(string studentId)
         {
-            Id = id;
+            StudentId = studentId;
 
         }
 

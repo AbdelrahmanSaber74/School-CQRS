@@ -43,5 +43,16 @@
 
         public const string SurnameRequired = "SurnameRequired";
         public const string SurnameMaxLength = "SurnameMaxLength";
+
+        // New Validation Messages Keys for Additional Fields
+        public const string CityRequired = "CityRequired";
+        public const string CountryRequired = "CountryRequired";
+        public const string NationalIdRequired = "NationalIdRequired";
+        public const string NationalIdInvalidFormat = "NationalIdInvalidFormat";
+        public const string PostalCodeRequired = "PostalCodeRequired";
+        public const string PostalCodeInvalidFormat = "PostalCodeInvalidFormat";
+        public const string EmergencyContactNameRequired = "EmergencyContactNameRequired";
+        public const string EmergencyContactPhoneRequired = "EmergencyContactPhoneRequired";
+        public const string EmergencyContactRelationRequired = "EmergencyContactRelationRequired";
     }
 }
