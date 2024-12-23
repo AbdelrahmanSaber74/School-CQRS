@@ -1,4 +1,6 @@
-﻿namespace School.Api.Controllers
+﻿using School.Core.Dto.Student;
+
+namespace School.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

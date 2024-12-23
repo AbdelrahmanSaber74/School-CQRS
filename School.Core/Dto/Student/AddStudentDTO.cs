@@ -1,4 +1,4 @@
-﻿namespace School.Core.Dto
+﻿namespace School.Core.Dto.Student
 {
     public class AddStudentDTO : BaseDTO
     {

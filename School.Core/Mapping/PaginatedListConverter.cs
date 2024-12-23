@@ -1,4 +1,6 @@
-﻿namespace School.Core.Mapping
+﻿using School.Core.Dto.Student;
+
+namespace School.Core.Mapping
 {
     public class PaginatedListConverter<TSource, TDestination> : ITypeConverter<PaginatedList<TSource>, PaginatedListDTO<TDestination>>
     {

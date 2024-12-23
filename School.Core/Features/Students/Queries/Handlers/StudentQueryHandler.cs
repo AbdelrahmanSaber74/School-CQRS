@@ -1,4 +1,6 @@
-﻿namespace School.Core.Features.Students.Queries.Handlers
+﻿using School.Core.Dto.Student;
+
+namespace School.Core.Features.Students.Queries.Handlers
 {
     public class StudentQueryHandler : ResponseHandler,
                                        IRequestHandler<GetStudentsListQuery, Response<IEnumerable<StudentDTO>>>,

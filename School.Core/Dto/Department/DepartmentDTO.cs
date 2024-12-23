@@ -1,6 +1,6 @@
 ﻿namespace School.Core.Dto.Department
 {
-    public class DepartmentDto
+    public class DepartmentDto : BaseDTO
     {
         public int Id { get; set; }
 

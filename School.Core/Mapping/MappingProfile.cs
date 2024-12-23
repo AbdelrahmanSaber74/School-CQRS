@@ -1,4 +1,6 @@
-﻿namespace School.Core.Mapping
+﻿using School.Core.Dto.Student;
+
+namespace School.Core.Mapping
 {
     public class MappingProfile : Profile
     {
