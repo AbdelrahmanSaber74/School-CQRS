@@ -208,4 +208,7 @@
   <data name="DeleteStudentFailed " xml:space="preserve">
     <value>فشل في حذف الطالب</value>
   </data>
+  <data name="NoDepartmentsAvailable" xml:space="preserve">
+    <value>لا توجد أقسام متاحة</value>
+  </data>
 </root>

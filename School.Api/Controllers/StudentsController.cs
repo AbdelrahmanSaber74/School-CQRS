@@ -17,7 +17,7 @@
         }
 
         [HttpPost]
-        [Route(Router.Students.AddStudent)]
+        [Route(Router.Departments.Add)]
         public async Task<IActionResult> Post([FromBody] AddStudentDTO studentDTO)
         {
             var result = await _mediator.Send(new AddStudentCommand(studentDTO));
@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        [Route(Router.Students.EditStudent)]
+        [Route(Router.Students.Edit)]
 
         public async Task<IActionResult> Get(EditStudentDTO editStudentDTO)
         {
@@ -47,7 +47,7 @@
 
 
         [HttpPost]
-        [Route(Router.Students.DeleteStudent)]
+        [Route(Router.Students.Delete)]
 
         public async Task<IActionResult> Delete(string studentId)
         {
@@ -57,7 +57,7 @@
 
 
         [HttpGet]
-        [Route(Router.Students.GetPaginatedStudents)]
+        [Route(Router.Students.GetPaginated)]
         public async Task<IActionResult> Get(int pageNumber , int pageSize)
         {
             var result = await _mediator.Send(new GetPaginatedStudentsListQuery(pageNumber , pageSize));

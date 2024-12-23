@@ -16,6 +16,8 @@
             // Mapping from AddStudentDTO to Student
             CreateMap<AddStudentDTO, Student>();
 
+            CreateMap<Department, DepartmentDto>();
+
             // Mapping from EditStudentDTO to Student
             CreateMap<EditStudentDTO, Student>();
 

@@ -1,5 +1,4 @@
-﻿
-namespace School.Infrastructure.Basics
+﻿namespace School.Infrastructure.Basics
 {
     public class GenericRepositoryAsync<T> : IGenericRepositoryAsync<T> where T : class
     {

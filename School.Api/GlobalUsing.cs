@@ -20,3 +20,4 @@ global using Microsoft.Extensions.Options;
 global using System.Globalization;
 global using School.Core.Resources;
 global using Microsoft.Extensions.Localization;
+global using School.Core.Features.Department.Queries.Models;

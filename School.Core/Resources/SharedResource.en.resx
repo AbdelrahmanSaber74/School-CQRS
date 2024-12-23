@@ -207,4 +207,7 @@
   <data name="DeleteStudentFailed " xml:space="preserve">
     <value>Failed to delete student.</value>
   </data>
+  <data name="NoDepartmentsAvailable" xml:space="preserve">
+    <value>No Departments Available</value>
+  </data>
 </root>

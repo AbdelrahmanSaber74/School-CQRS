@@ -17,3 +17,5 @@ global using School.Core.Behaviors;
 global using School.Data.Wrappers;
 global using Microsoft.Extensions.Localization;
 global using School.Core.Resources;
+global using School.Core.Dto.Department;
+global using School.Core.Features.Department.Queries.Models;

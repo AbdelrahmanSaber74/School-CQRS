@@ -8,9 +8,11 @@ public static class InfrastructureRegistration
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         // Register repositories
+        services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+        services.AddTransient<IInstructorRepository, InstructorRepository>();
         services.AddTransient<IStudentRepository, StudentRepository>();
         services.AddTransient<ISubjectRepository, SubjectRepository>();
-        services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+
         services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
 
         // Register other infrastructure dependencies

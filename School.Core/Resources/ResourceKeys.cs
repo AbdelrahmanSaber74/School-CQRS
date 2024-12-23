@@ -11,6 +11,7 @@
         public const string UnprocessableEntity = "UnprocessableEntity";
         public const string BadRequest = "BadRequest";
         public const string CreatedSuccessfully = "CreatedSuccessfully";
+        public const string NoDepartmentsAvailable = "NoDepartmentsAvailable";
 
         // Student Resource Keys
         public const string StudentAddedSuccessfully = "StudentAddedSuccessfully";
