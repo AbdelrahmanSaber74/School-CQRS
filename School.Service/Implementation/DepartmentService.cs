@@ -18,5 +18,9 @@
         {
             return await _departmentRepository.GetAllAsync();
         }
+        public async Task<bool> DepartmentExists(int departmentId)
+        {
+            return await _departmentRepository.ExistsAsync(d => d.Id == departmentId);
+        }
     }
 }

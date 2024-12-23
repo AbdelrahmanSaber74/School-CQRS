@@ -24,10 +24,7 @@
             return !await _studentRepository.ExistsAsync(r => r.Email == email || r.Phone == phone || r.NationalId == nationalId);
         }
 
-        public async Task<bool> DepartmentExists(int departmentId)
-        {
-            return await _departmentRepository.ExistsAsync(d => d.Id == departmentId);
-        }
+      
 
         public async Task<Student> GetStudentByIdAsync(string studentId)
         {

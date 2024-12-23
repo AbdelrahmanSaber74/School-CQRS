@@ -10,29 +10,23 @@ namespace School.Api.Controllers
 
         [HttpGet]
         [Route(Router.Students.GetAll)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllStudents()
         {
             var result = await _mediator.Send(new GetStudentsListQuery());
-
             return HandleResult(result);
-
         }
 
         [HttpPost]
-        [Route(Router.Departments.Add)]
-        public async Task<IActionResult> Post([FromBody] AddStudentDTO studentDTO)
+        [Route(Router.Students.Add)]
+        public async Task<IActionResult> AddStudent([FromBody] AddStudentDTO studentDTO)
         {
             var result = await _mediator.Send(new AddStudentCommand(studentDTO));
-
             return HandleResult(result);
-
-
         }
 
         [HttpGet]
         [Route(Router.Students.GetById)]
-
-        public async Task<IActionResult> Get(string studentId)
+        public async Task<IActionResult> GetStudentById(string studentId)
         {
             var result = await _mediator.Send(new GetStudentByIdQuery(studentId));
             return HandleResult(result);
@@ -40,29 +34,25 @@ namespace School.Api.Controllers
 
         [HttpPost]
         [Route(Router.Students.Edit)]
-
-        public async Task<IActionResult> Get(EditStudentDTO editStudentDTO)
+        public async Task<IActionResult> EditStudent(EditStudentDTO editStudentDTO)
         {
             var result = await _mediator.Send(new EditStudentCommand(editStudentDTO));
             return HandleResult(result);
         }
 
-
         [HttpPost]
         [Route(Router.Students.Delete)]
-
-        public async Task<IActionResult> Delete(string studentId)
+        public async Task<IActionResult> DeleteStudent(string studentId)
         {
             var result = await _mediator.Send(new DeleteStudentCommand(studentId));
             return HandleResult(result);
         }
 
-
         [HttpGet]
         [Route(Router.Students.GetPaginated)]
-        public async Task<IActionResult> Get(int pageNumber , int pageSize)
+        public async Task<IActionResult> GetPaginatedStudents(int pageNumber, int pageSize)
         {
-            var result = await _mediator.Send(new GetPaginatedStudentsListQuery(pageNumber , pageSize));
+            var result = await _mediator.Send(new GetPaginatedStudentsListQuery(pageNumber, pageSize));
             return HandleResult(result);
         }
     }

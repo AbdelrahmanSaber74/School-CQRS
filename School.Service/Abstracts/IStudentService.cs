@@ -10,7 +10,6 @@
         Task<bool> IsStudentUnique(string email, string phone, string nationalId);
         Task<bool> IsEmailExistExcludeSelf(string studentId, string email);
         Task<bool> IsPhoneExistExcludeSelf(string studentId, string phone);
-        Task<bool> DepartmentExists(int departmentId);
         Task<PaginatedList<Student>> GetQueryableStudentsAsync(int pageNumber, int pageSize);
 
     }
