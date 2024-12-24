@@ -19,3 +19,5 @@ global using Microsoft.Extensions.Localization;
 global using School.Core.Resources;
 global using School.Core.Dto.Department;
 global using School.Core.Features.Department.Queries.Models;
+global using School.Core.Dto.User;
+global using School.Core.Features.User.Queries.Models;

@@ -9,6 +9,7 @@
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<ISubjectService, SubjectsService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IUserService, UserService>();
 
           //  Register other infrastructure dependencies
             services.AddLogging();

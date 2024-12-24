@@ -23,5 +23,14 @@
             public const string Edit = $"{BaseApi}/departments/Edit";
             public const string Delete = $"{BaseApi}/departments/Delete";
         }
+
+        public static class Users
+        {
+            public const string GetByEmail = $"{BaseApi}/users/GetByEmail";
+            public const string GetAll = $"{BaseApi}/users/GetAll";
+            public const string Add = $"{BaseApi}/users/Add";
+            public const string Edit = $"{BaseApi}/users/Edit";
+            public const string Delete = $"{BaseApi}/users/Delete";
+        }
     }
 }
