@@ -210,4 +210,22 @@
   <data name="NoDepartmentsAvailable" xml:space="preserve">
     <value>No Departments Available</value>
   </data>
+  <data name="PasswordRequired " xml:space="preserve">
+    <value>Password is required.</value>
+  </data>
+  <data name="PasswordMinLength " xml:space="preserve">
+    <value>Password must be at least 6 characters long.</value>
+  </data>
+  <data name="AddressMaxLength " xml:space="preserve">
+    <value>Address must not exceed 100 characters.
+</value>
+  </data>
+  <data name="CountryMaxLength " xml:space="preserve">
+    <value>Country must not exceed 50 characters.
+</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Passwords do not match.
+</value>
+  </data>
 </root>

@@ -16,6 +16,14 @@
             return user;
         }
 
+        public async Task<bool> IsEmailUnique(string email)
+        {
+            return !await _userRepository.ExistsAsync(r => r.Email == email);
+        }
 
+        public async Task<bool> IsPhoneNumberUnique(string phoneNumber)
+        {
+            return !await _userRepository.ExistsAsync(r => r.PhoneNumber == phoneNumber);
+        }
     }
 }

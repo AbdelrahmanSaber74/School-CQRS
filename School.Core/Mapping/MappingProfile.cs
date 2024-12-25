@@ -23,6 +23,8 @@ namespace School.Core.Mapping
             // Mapping from EditStudentDTO to Student
             CreateMap<EditStudentDTO, Student>();
 
+            CreateMap<CreateDTO, ApplicationUser>();
+
             // Mapping from PaginatedList<T> to PaginatedListDTO<T>
             CreateMap(typeof(PaginatedList<>), typeof(PaginatedListDTO<>))
                 .ConvertUsing(typeof(PaginatedListConverter<,>));

@@ -8,3 +8,4 @@ global using Microsoft.EntityFrameworkCore;
 global using School.Data.Consts;
 global using School.Data.Wrappers;
 global using School.Infrastructure.Context;
+global using Microsoft.AspNetCore.Identity;

@@ -32,5 +32,12 @@
             public const string Edit = $"{BaseApi}/users/Edit";
             public const string Delete = $"{BaseApi}/users/Delete";
         }
+
+        public static class Authentication
+        {
+            public const string Login = $"{BaseApi}/auth/login";
+            public const string Create = $"{BaseApi}/auth/Create";
+            public const string Logout = $"{BaseApi}/auth/logout";
+        }
     }
 }

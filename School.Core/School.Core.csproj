@@ -19,6 +19,8 @@
     <ProjectReference Include="..\School.Service\School.Service.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Features\Authentication\Queries\Models\" />
+    <Folder Include="Features\Authentication\Queries\Handlers\" />
     <Folder Include="Features\Department\Commands\" />
     <Folder Include="Features\Students\Commands\Handlers\" />
     <Folder Include="Features\Subjects\Dto\" />

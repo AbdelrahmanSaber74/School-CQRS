@@ -21,3 +21,6 @@ global using School.Core.Dto.Department;
 global using School.Core.Features.Department.Queries.Models;
 global using School.Core.Dto.User;
 global using School.Core.Features.User.Queries.Models;
+global using School.Service.DTOs;
+global using School.Core.Features.Authentication.Commands.Models;
+global using School.Infrastructure.Context;

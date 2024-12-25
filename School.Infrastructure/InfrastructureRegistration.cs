@@ -13,6 +13,7 @@ public static class InfrastructureRegistration
         services.AddTransient<IStudentRepository, StudentRepository>();
         services.AddTransient<ISubjectRepository, SubjectRepository>();
         services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
 
         services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
 

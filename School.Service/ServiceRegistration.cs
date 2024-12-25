@@ -10,6 +10,7 @@
             services.AddScoped<ISubjectService, SubjectsService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
           //  Register other infrastructure dependencies
             services.AddLogging();

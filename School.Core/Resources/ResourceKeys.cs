@@ -55,5 +55,13 @@
         public const string EmergencyContactNameRequired = "EmergencyContactNameRequired";
         public const string EmergencyContactPhoneRequired = "EmergencyContactPhoneRequired";
         public const string EmergencyContactRelationRequired = "EmergencyContactRelationRequired";
+
+        // Password and Address Validation Keys
+        public const string PasswordRequired = "PasswordRequired";
+        public const string PasswordMinLength = "PasswordMinLength";
+        public const string ConfirmPasswordMatch = "ConfirmPasswordMatch";
+        public const string AddressMaxLength = "AddressMaxLength";
+        public const string CountryMaxLength = "CountryMaxLength";
+        public const string PasswordsDoNotMatch = "PasswordsDoNotMatch";
     }
 }

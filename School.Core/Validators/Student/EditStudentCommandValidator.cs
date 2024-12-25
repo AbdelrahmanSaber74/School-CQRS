@@ -1,4 +1,4 @@
-﻿namespace School.Core.Features.Students.Commands.Validators
+﻿namespace School.Core.Validators.Student
 {
     public class EditStudentCommandValidator : AbstractValidator<EditStudentCommand>
     {
